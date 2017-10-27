@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Spring Boot Thymeleaf + Spring Security</title>
+    <title>Home-Budget</title>
 
     <div th:replace="fragments/header :: header-css"/>
 
@@ -10,13 +10,18 @@
 
 <div th:replace="fragments/header :: header"/>
 
-<div class="container">
+<div class="container content">
 
     <div class="starter-template">
-        <h1>Spring Boot Web Thymeleaf + Spring Security</h1>
-        <h2>1. Visit <a th:href="@{/admin}">Admin page (Spring Security protected, Need Admin Role)</a></h2>
-        <h2>2. Visit <a th:href="@{/user}">User page (Spring Security protected, Need User Role)</a></h2>
-        <h2>3. Visit <a th:href="@{/about}">Normal page</a></h2>
+        <h1>Main page.</h1>
+        <p>
+            There are two users:<br/>
+            <ol>
+                <li>admin</li>
+                <li>user</li>
+            </ol>
+            Password for both accounts is: 'password'.
+        </p>
     </div>
 
 </div>
