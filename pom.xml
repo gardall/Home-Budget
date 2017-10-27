@@ -78,6 +78,13 @@
             <artifactId>bootstrap</artifactId>
             <version>4.0.0-beta-1</version>
         </dependency>
+
+        <!-- jQuery -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery</artifactId>
+            <version>3.2.1</version>
+        </dependency>
     </dependencies>
 
     <build>
