@@ -1,0 +1,20 @@
+/* Page content */
+.content{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 15px;
+    background-color: #eeeeee;
+}
+
+/* Footer */
+footer{
+    background-color: #343a40;
+    color: white;
+    text-align: center;
+    padding: 20px 0px 20px 0px;
+}
+
+footer #footer-home-link{
+    color: inherit;
+    text-decoration: none;
+}
