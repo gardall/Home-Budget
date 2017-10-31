@@ -16,11 +16,6 @@ public class DefaultController {
         return "/home";
     }
 
-    @GetMapping("/admin")
-    public String admin() {
-        return "/admin";
-    }
-
     @GetMapping("/user")
     public String user() {
         return "/user";
