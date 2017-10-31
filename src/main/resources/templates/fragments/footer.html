@@ -8,7 +8,7 @@
 
     <footer>
         <div class="container">
-            © 2017 Lechowicz-Family
+            © 2017 <a id="footer-home-link" href="/">Lechowicz-Family</a>
             <span sec:authorize="isAuthenticated()">
                 | Logged user: <span sec:authentication="name"></span> |
                 <a th:href="@{/logout}">Sign Out</a>
