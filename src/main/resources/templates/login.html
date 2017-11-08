@@ -1,92 +1,44 @@
-<!--<!DOCTYPE html>-->
-<!--<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"-->
-<!--&gt;-->
-<!--<head>-->
-    <!--<title>Login - Home-Budget</title>-->
-    <!--<div th:replace="fragments/header :: header-css"/>-->
-<!--</head>-->
-<!--<body>-->
-
-<!--<div th:replace="fragments/header :: header"/>-->
-
-<!--<div class="container content">-->
-
-    <!--<div class="row" style="margin-top:20px">-->
-        <!--<div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">-->
-            <!--<form th:action="@{/login}" method="post">-->
-                <!--<fieldset>-->
-                    <!--<h1>Please Sign In</h1>-->
-
-                    <!--<div th:if="${param.error}">-->
-                        <!--<div class="alert alert-danger">-->
-                            <!--Invalid username and password.-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div th:if="${param.logout}">-->
-                        <!--<div class="alert alert-info">-->
-                            <!--You have been logged out.-->
-                        <!--</div>-->
-                    <!--</div>-->
-
-                    <!--<div class="form-group">-->
-                        <!--<input type="text" name="username" id="username" class="form-control input-lg"-->
-                               <!--placeholder="UserName" required="true" autofocus="true"/>-->
-                    <!--</div>-->
-                    <!--<div class="form-group">-->
-                        <!--<input type="password" name="password" id="password" class="form-control input-lg"-->
-                               <!--placeholder="Password" required="true"/>-->
-                    <!--</div>-->
-
-                    <!--<div class="row">-->
-                        <!--<div class="col-xs-6 col-sm-6 col-md-6">-->
-                            <!--<input type="submit" class="btn btn-lg btn-primary btn-block" value="Sign In"/>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</fieldset>-->
-            <!--</form>-->
-        <!--</div>-->
-    <!--</div>-->
-
-<!--</div>-->
-
-<!--<div th:replace="fragments/footer :: footer"/>-->
-
-<!--</body>-->
-<!--</html>-->
-
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header(title='Login - Home-Budget')">
 
-<head>
-    <title>Spring Security Tutorial</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-
 <body>
-<form th:action="@{/registration}" method="get">
-    <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Registration Page</button>
-</form>
 
-<div class="container">
-    <form th:action="@{/login}" method="POST" class="form-signin">
-        <h3 class="form-signin-heading" th:text="Welcome"></h3>
-        <br/>
+<div th:replace="fragments/header :: nav"></div>
 
-        <input type="text" id="username" name="username"  th:placeholder="username"
-               class="form-control" /> <br/>
-        <input type="password"  th:placeholder="password"
-               id="password" name="password" class="form-control" /> <br />
+<div class="container content">
 
-        <div align="center" th:if="${param.error}">
-            <p style="font-size: 20; color: #FF1C19;">Username or Password invalid, please verify</p>
+    <div class="row" style="margin-top:20px">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+            <form th:action="@{/registration}" method="get">
+                <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Registration Page</button>
+            </form>
+
+
+            <form th:action="@{/login}" method="POST" class="form-signin">
+                <h3 class="form-signin-heading" th:text="Welcome"></h3>
+                <br/>
+
+                <input type="text" id="username" name="username"  th:placeholder="username"
+                       class="form-control" /> <br/>
+                <input type="password"  th:placeholder="password"
+                       id="password" name="password" class="form-control" /> <br />
+
+                <div align="center" th:if="${param.error}">
+                    <p style="font-size: 20; color: #FF1C19;">Username or Password invalid, please verify</p>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit" th:text="Login"></button>
+            </form>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit" th:text="Login"></button>
-    </form>
+    </div>
+
 </div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
 </body>
 </html>
+
+
