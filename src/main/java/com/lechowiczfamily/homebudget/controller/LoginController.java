@@ -21,7 +21,7 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
     public ModelAndView login() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login");
@@ -53,25 +53,18 @@ public class LoginController {
             modelAndView.addObject("successMessage", "User has been registered successfully");
             modelAndView.addObject("user", new User());
             modelAndView.setViewName("registration");
-
         }
         return modelAndView;
     }
 
-    @RequestMapping(value = "/home", method = RequestMethod.GET)
-    public ModelAndView home() {
-        ModelAndView modelAndView = new ModelAndView();
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByUsername(auth.getName());
-        modelAndView.addObject("username", "Welcome " + user.getUsername());
-        modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");
-        modelAndView.setViewName("/home");
-        return modelAndView;
+    @GetMapping(value = {"/","/home"})
+    public String home() {
+        return "/home";
     }
 
-    @GetMapping("/user")
-    public String user() {
-        return "/user";
+    @GetMapping("/dashboard")
+    public String dashboard() {
+        return "/dashboard";
     }
 
     @GetMapping("/about")

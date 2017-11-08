@@ -10,18 +10,17 @@
 
 <div class="container content">
 
-    <div class="row" style="margin-top:20px">
-        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-            <form th:action="@{/registration}" method="get">
-                <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Registration Page</button>
-            </form> <br/>
+    <h1>Sign in</h1> <br/>
+
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
 
             <form th:action="@{/login}" method="POST" class="form-signin">
 
-                <input type="text" id="username" name="username" th:placeholder="username"
+                <input type="text" id="username" name="username" th:placeholder="Username"
                        class="form-control"/> <br/>
 
-                <input type="password" th:placeholder="password"
+                <input type="password" th:placeholder="Password"
                        id="password" name="password" class="form-control"/> <br/>
 
                 <div align="center" th:if="${param.error}">
@@ -29,9 +28,23 @@
                 </div>
                 <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit"
                         th:text="Login"></button>
+                <br/>
             </form>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+
+            <form th:action="@{/registration}" method="get">
+                <button class="btn btn-md btn-warning btn-block" type="Submit">Don't have an account? Sign up now!
+                </button>
+            </form>
+            <br/>
+        </div>
+    </div>
+
+
 </div>
 
 <div th:replace="fragments/footer :: footer"></div>
