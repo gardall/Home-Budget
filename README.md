@@ -7,13 +7,13 @@ Authentication provided based on [this](https://medium.com/@gustavo.ponce.ch/spr
 
 Task list:
 
-[x] - Init Spring Boot Application
-[x] - Add Spring Data and Spring Security
-[x] - Create connection with MySQL database
-[x] - Provide authentication
-[x] - Init Bootstrap 4 based views
-[ ] - Add calculation modules
-[ ] - Set up database for money transactions
-[ ] - Update dashboard view
-[ ] - Add tests
+- [x] Init Spring Boot Application
+- [x] Add Spring Data and Spring Security
+- [x] Create connection with MySQL database
+- [x] Provide authentication
+- [x] Init Bootstrap 4 based views
+- [ ] Add calculation modules
+- [ ] Set up database for money transactions
+- [ ] Update dashboard view
+- [ ] Add tests
  
