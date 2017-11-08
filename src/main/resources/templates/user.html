@@ -1,11 +1,12 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <div th:replace="fragments/header :: header-css"/>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header(title='User Page - Home-Budget')">
+
 </head>
 <body>
 
-<div th:replace="fragments/header :: header"/>
+<div th:replace="fragments/header :: nav"></div>
 
 <div class="container content">
 
@@ -20,11 +21,9 @@
                 </form>
             </div>
         </div>
-
     </div>
-
 </div>
-<!-- /.container -->
+
 <div th:replace="fragments/footer :: footer"/>
 
 </body>
