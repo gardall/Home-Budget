@@ -1,16 +1,17 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <div th:replace="fragments/header :: header-css"/>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/header :: header(title='Dashboard - Home-Budget')">
+
 </head>
 <body>
 
-<div th:replace="fragments/header :: header"/>
+<div th:replace="fragments/header :: nav"></div>
 
 <div class="container content">
 
     <div class="starter-template">
-        <h1>User page (Spring Security protected)</h1>
+        <h1>Dashboard</h1>
 
         <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
         <div class="row">
@@ -20,11 +21,9 @@
                 </form>
             </div>
         </div>
-
     </div>
-
 </div>
-<!-- /.container -->
+
 <div th:replace="fragments/footer :: footer"/>
 
 </body>

@@ -1,32 +1,22 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Home-Budget</title>
-
-    <div th:replace="fragments/header :: header-css"/>
+<head th:replace="fragments/header :: header(title='Home-Budget')">
 
 </head>
 <body>
 
-<div th:replace="fragments/header :: header"/>
+<div th:replace="fragments/header :: nav"></div>
 
 <div class="container content">
 
     <div class="starter-template">
         <h1>Main page.</h1>
-        <p>
-            Login data:<br/>
-            <ul>
-                <li>User name: user</li>
-                <li>Password: password</li>
-            </ul>
-        </p>
     </div>
 
 </div>
 <!-- /.container -->
 
-<div th:replace="fragments/footer :: footer"/>
+<div th:replace="fragments/footer :: footer"></div>
 
 </body>
 </html>
