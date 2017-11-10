@@ -4,11 +4,10 @@ package com.lechowiczfamily.homebudget.model;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "transctions")
+@Table(name = "transaction")
 public class MoneyTransaction {
 
     @Id
@@ -24,12 +23,13 @@ public class MoneyTransaction {
     @NotEmpty(message = "*Please provide the amount of the transaction")
     private int amount;
 
-    @Column(name = "target_users")
-    private String targetUsers;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinTable(name = "trans_buyer", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "trans_id"))
+    private User buyer;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "trans_buyer", joinColumns = @JoinColumn(name = "trans_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private List<User> buyer;
+    @JoinTable(name = "trans_target", joinColumns = @JoinColumn(name = "trans_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private List<User> targetUsers;
 
     public int getId() {
         return id;
@@ -55,19 +55,20 @@ public class MoneyTransaction {
         this.amount = amount;
     }
 
-    public String getTargetUsers() {
+    public List<User> getTargetUsers() {
         return targetUsers;
     }
 
-    public void setTargetUsers(String targetUsers) {
+    public void setTargetUsers(List<User> targetUsers) {
         this.targetUsers = targetUsers;
     }
 
-    public List<User> getBuyer() {
+
+    public User getBuyer() {
         return buyer;
     }
 
-    public void setBuyer(List<User> buyer) {
+    public void setBuyer(User buyer) {
         this.buyer = buyer;
     }
 }
