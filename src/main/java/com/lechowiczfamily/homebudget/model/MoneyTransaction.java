@@ -4,6 +4,7 @@ package com.lechowiczfamily.homebudget.model;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -20,7 +21,7 @@ public class MoneyTransaction {
     private String name;
 
     @Column(name = "amount")
-    @NotEmpty(message = "*Please provide the amount of the transaction")
+    @NotNull(message = "*Please provide the amount of the transaction")
     private int amount;
 
     @OneToMany(cascade = CascadeType.ALL)
