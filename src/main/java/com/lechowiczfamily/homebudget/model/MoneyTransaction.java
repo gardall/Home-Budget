@@ -23,12 +23,12 @@ public class MoneyTransaction {
     @NotEmpty(message = "*Please provide the amount of the transaction")
     private int amount;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinTable(name = "trans_buyer", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "trans_id"))
-    private User buyer;
-
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "trans_target", joinColumns = @JoinColumn(name = "trans_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+    @JoinTable(name = "transaction_buyer", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "trans_id"))
+    private List<User> buyer;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "transaction_target", joinColumns = @JoinColumn(name = "trans_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> targetUsers;
 
     public int getId() {
@@ -64,11 +64,11 @@ public class MoneyTransaction {
     }
 
 
-    public User getBuyer() {
+    public List<User> getBuyer() {
         return buyer;
     }
 
-    public void setBuyer(User buyer) {
+    public void setBuyer(List<User> buyer) {
         this.buyer = buyer;
     }
 }
