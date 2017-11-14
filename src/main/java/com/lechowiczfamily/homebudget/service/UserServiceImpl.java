@@ -23,7 +23,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-
     @Override
     public User findUserByUsername(String username) {
         return userRepository.findByUsername(username);

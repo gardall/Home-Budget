@@ -62,7 +62,7 @@ public class MoneyTransaction {
     public void setTargetUsers(List<User> targetUsers) {
         this.targetUsers = targetUsers;
     }
-    
+
     public List<User> getBuyer() {
         return buyer;
     }
