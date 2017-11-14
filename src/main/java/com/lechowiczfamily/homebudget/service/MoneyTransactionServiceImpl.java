@@ -5,6 +5,8 @@ import com.lechowiczfamily.homebudget.repository.MoneyTransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service("moneyTransactionService")
 public class MoneyTransactionServiceImpl implements MoneyTransactionService {
 
@@ -18,8 +20,11 @@ public class MoneyTransactionServiceImpl implements MoneyTransactionService {
 
     @Override
     public void saveMoneyTransaction(MoneyTransaction transaction) {
-        transaction.setAmount(100);
-        transaction.setName("Whatever");
         moneyTransactionRepository.save(transaction);
+    }
+
+    @Override
+    public List<MoneyTransaction> findAllTransactions() {
+        return moneyTransactionRepository.findAll();
     }
 }
