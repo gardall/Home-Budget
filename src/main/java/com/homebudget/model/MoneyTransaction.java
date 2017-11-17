@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Table(name = "transaction")
@@ -25,6 +26,14 @@ public class MoneyTransaction {
 
     @ManyToOne(optional = false)
     private User buyer;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "transaction_targetUsers",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "trans_id")
+    )
+    private List<User> targetUsres;
 
     public int getId() {
         return id;
@@ -56,6 +65,14 @@ public class MoneyTransaction {
 
     public void setBuyer(User buyer) {
         this.buyer = buyer;
+    }
+
+    public List<User> getTargetUsres() {
+        return targetUsres;
+    }
+
+    public void setTargetUsres(List<User> targetUsres) {
+        this.targetUsres = targetUsres;
     }
 }
 

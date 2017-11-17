@@ -11,6 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import static java.lang.String.format;
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.joining;
@@ -33,14 +36,16 @@ public class MoneyTransactionController {
         trans.setAmount(100);
         SecurityContextHolder.getContext().getAuthentication().getName();
         trans.setBuyer(userService.findUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()));
+        trans.setTargetUsres(Arrays.asList(userService.findUserByUsername("user1"),userService.findUserByUsername("admin")));
         moneyTransactionService.saveMoneyTransaction(trans);
 
         return moneyTransactionService.findAllTransactions()
                 .stream()
-                .map(moneyTransaction -> format("%d | %d | %s",
+                .map(moneyTransaction -> format("%d | %d | %s | %s",
                         moneyTransaction.getId(),
                         moneyTransaction.getAmount(),
-                        moneyTransaction.getBuyer().getUsername()))
+                        moneyTransaction.getBuyer().getUsername(),
+                        Arrays.toString(moneyTransaction.getTargetUsres().stream().map(a->a.getUsername()).toArray())))
                 .collect(collectingAndThen(joining("<br>"), response -> response +"<br>"));
     }
 }
