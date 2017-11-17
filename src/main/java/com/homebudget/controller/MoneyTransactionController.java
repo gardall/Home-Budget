@@ -5,9 +5,12 @@ import com.homebudget.service.MoneyTransactionService;
 import com.homebudget.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import static java.lang.String.format;
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.joining;
 
 @Controller
 public class MoneyTransactionController {
@@ -18,26 +21,22 @@ public class MoneyTransactionController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = {"/dashboard"}, method = RequestMethod.GET)
+    @GetMapping(value = "/dashboard")
     @ResponseBody
     public String testMethod() {
-        StringBuilder response = new StringBuilder();
 
         MoneyTransaction trans = new MoneyTransaction();
-                trans.setName("T 1");
-                trans.setAmount(100);
-                trans.setBuyer(userService.findUserByUsername("admin"));
-                moneyTransactionService.saveMoneyTransaction(trans);
+        trans.setName("T 1");
+        trans.setAmount(100);
+        trans.setBuyer(userService.findUserByUsername("admin"));
+        moneyTransactionService.saveMoneyTransaction(trans);
 
-        for(MoneyTransaction i: moneyTransactionService.findAllTransactions()) {
-            response.append(i.getId())
-                    .append("|")
-                    .append(i.getAmount())
-                    .append("|")
-                    .append(i.getBuyer().getUsername())
-                    .append("<br>");
-        }
-
-        return response.toString();
+        return moneyTransactionService.findAllTransactions()
+                .stream()
+                .map(moneyTransaction -> format("%d | %d | %s",
+                        moneyTransaction.getId(),
+                        moneyTransaction.getAmount(),
+                        moneyTransaction.getBuyer().getUsername()))
+                .collect(collectingAndThen(joining("<br>"), response -> response + "<br>"));
     }
 }
