@@ -1,4 +1,4 @@
-package com.lechowiczfamily.homebudget.config;
+package com.homebudget.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

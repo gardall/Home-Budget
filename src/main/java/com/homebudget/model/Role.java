@@ -1,4 +1,4 @@
-package com.lechowiczfamily.homebudget.model;
+package com.homebudget.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -1,6 +1,6 @@
-package com.lechowiczfamily.homebudget.service;
+package com.homebudget.service;
 
-import com.lechowiczfamily.homebudget.model.MoneyTransaction;
+import com.homebudget.model.MoneyTransaction;
 
 import java.util.List;
 

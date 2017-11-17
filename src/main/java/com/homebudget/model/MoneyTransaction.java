@@ -1,4 +1,4 @@
-package com.lechowiczfamily.homebudget.model;
+package com.homebudget.model;
 
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -24,6 +24,17 @@ public class MoneyTransaction {
     @NotNull(message = "*Please provide the amount of the transaction")
     private int amount;
 
+    @ManyToOne(optional = false)
+    private User buyer;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "transaction_targetUsers",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "trans_id")
+    )
+    private List<User> targetUsres;
+
     public int getId() {
         return id;
     }
@@ -48,5 +59,20 @@ public class MoneyTransaction {
         this.amount = amount;
     }
 
+    public User getBuyer() {
+        return buyer;
+    }
+
+    public void setBuyer(User buyer) {
+        this.buyer = buyer;
+    }
+
+    public List<User> getTargetUsres() {
+        return targetUsres;
+    }
+
+    public void setTargetUsres(List<User> targetUsres) {
+        this.targetUsres = targetUsres;
+    }
 }
 
