@@ -24,14 +24,6 @@ public class MoneyTransaction {
     @NotNull(message = "*Please provide the amount of the transaction")
     private int amount;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "transaction_buyer", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "trans_id"))
-    private List<User> buyer;
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "transaction_target", joinColumns = @JoinColumn(name = "trans_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private List<User> targetUsers;
-
     public int getId() {
         return id;
     }
@@ -56,20 +48,5 @@ public class MoneyTransaction {
         this.amount = amount;
     }
 
-    public List<User> getTargetUsers() {
-        return targetUsers;
-    }
-
-    public void setTargetUsers(List<User> targetUsers) {
-        this.targetUsers = targetUsers;
-    }
-
-    public List<User> getBuyer() {
-        return buyer;
-    }
-
-    public void setBuyer(List<User> buyer) {
-        this.buyer = buyer;
-    }
 }
 
