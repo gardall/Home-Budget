@@ -24,6 +24,9 @@ public class MoneyTransaction {
     @NotNull(message = "*Please provide the amount of the transaction")
     private int amount;
 
+    @ManyToOne(optional = false)
+    private User buyer;
+
     public int getId() {
         return id;
     }
@@ -48,5 +51,12 @@ public class MoneyTransaction {
         this.amount = amount;
     }
 
+    public User getBuyer() {
+        return buyer;
+    }
+
+    public void setBuyer(User buyer) {
+        this.buyer = buyer;
+    }
 }
 
