@@ -1,9 +1,12 @@
 package com.homebudget.controller;
 
 import com.homebudget.model.MoneyTransaction;
+import com.homebudget.model.User;
 import com.homebudget.service.MoneyTransactionService;
 import com.homebudget.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,7 +31,8 @@ public class MoneyTransactionController {
         MoneyTransaction trans = new MoneyTransaction();
         trans.setName("T 1");
         trans.setAmount(100);
-        trans.setBuyer(userService.findUserByUsername("admin"));
+        SecurityContextHolder.getContext().getAuthentication().getName();
+        trans.setBuyer(userService.findUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()));
         moneyTransactionService.saveMoneyTransaction(trans);
 
         return moneyTransactionService.findAllTransactions()
@@ -37,6 +41,6 @@ public class MoneyTransactionController {
                         moneyTransaction.getId(),
                         moneyTransaction.getAmount(),
                         moneyTransaction.getBuyer().getUsername()))
-                .collect(collectingAndThen(joining("<br>"), response -> response + "<br>"));
+                .collect(collectingAndThen(joining("<br>"), response -> response +"<br>"));
     }
 }
