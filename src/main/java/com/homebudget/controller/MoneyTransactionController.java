@@ -1,8 +1,8 @@
-package com.lechowiczfamily.homebudget.controller;
+package com.homebudget.controller;
 
-import com.lechowiczfamily.homebudget.model.MoneyTransaction;
-import com.lechowiczfamily.homebudget.service.MoneyTransactionService;
-import com.lechowiczfamily.homebudget.service.UserService;
+import com.homebudget.model.MoneyTransaction;
+import com.homebudget.service.MoneyTransactionService;
+import com.homebudget.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

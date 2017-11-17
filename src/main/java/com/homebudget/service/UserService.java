@@ -1,6 +1,6 @@
-package com.lechowiczfamily.homebudget.service;
+package com.homebudget.service;
 
-import com.lechowiczfamily.homebudget.model.User;
+import com.homebudget.model.User;
 
 public interface UserService {
     public User findUserByUsername(String username);

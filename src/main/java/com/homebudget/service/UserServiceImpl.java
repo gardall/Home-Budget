@@ -1,9 +1,9 @@
-package com.lechowiczfamily.homebudget.service;
+package com.homebudget.service;
 
-import com.lechowiczfamily.homebudget.model.Role;
-import com.lechowiczfamily.homebudget.model.User;
-import com.lechowiczfamily.homebudget.repository.RoleRepository;
-import com.lechowiczfamily.homebudget.repository.UserRepository;
+import com.homebudget.model.Role;
+import com.homebudget.model.User;
+import com.homebudget.repository.RoleRepository;
+import com.homebudget.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

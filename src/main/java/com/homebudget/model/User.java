@@ -1,4 +1,4 @@
-package com.lechowiczfamily.homebudget.model;
+package com.homebudget.model;
 
 import java.util.List;
 import java.util.Set;
@@ -18,7 +18,7 @@ public class User {
     @Column(name = "user_id")
     private int id;
 
-    @Column(name = "username")
+    @Column(name = "username", nullable = false, unique = true)
     @NotEmpty(message = "*Please provide your username")
     private String username;
 
@@ -32,7 +32,11 @@ public class User {
     private int active;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
     private Set<Role> roles;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "buyer")

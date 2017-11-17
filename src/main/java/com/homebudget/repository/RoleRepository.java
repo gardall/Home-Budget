@@ -1,6 +1,6 @@
-package com.lechowiczfamily.homebudget.repository;
+package com.homebudget.repository;
 
-import com.lechowiczfamily.homebudget.model.Role;
+import com.homebudget.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
