@@ -1,22 +1,19 @@
 package com.homebudget.controller;
 
 import com.homebudget.model.MoneyTransaction;
-import com.homebudget.model.User;
 import com.homebudget.service.MoneyTransactionService;
 import com.homebudget.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
+import javax.validation.Valid;
 import java.util.Arrays;
-
-import static java.lang.String.format;
-import static java.util.stream.Collectors.collectingAndThen;
-import static java.util.stream.Collectors.joining;
 
 @Controller
 public class MoneyTransactionController {
@@ -26,6 +23,34 @@ public class MoneyTransactionController {
 
     @Autowired
     private UserService userService;
+
+    @GetMapping("/dashboard")
+    public ModelAndView dashboard() {
+        ModelAndView modelAndView = new ModelAndView();
+        MoneyTransaction moneyTransaction = new MoneyTransaction();
+        modelAndView.addObject("moneyTransaction", moneyTransaction);
+        modelAndView.setViewName("dashboard");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/dashboard", method = RequestMethod.POST)
+    public ModelAndView createNewMoneyTransaction(@Valid MoneyTransaction moneyTransaction, BindingResult bindingResult) {
+        ModelAndView modelAndView = new ModelAndView();
+
+        if (bindingResult.hasErrors()) {
+            modelAndView.setViewName("registration");
+        } else {
+            moneyTransaction.setBuyer(userService.findUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()));
+            moneyTransaction.setTargetUsers(Arrays.asList(userService.findUserByUsername("user1"), userService.findUserByUsername("admin")));
+
+            moneyTransactionService.saveMoneyTransaction(moneyTransaction);
+            modelAndView.addObject("successMessage", "Transaction has been added successfully!");
+            modelAndView.addObject("moneyTransaction", new MoneyTransaction());
+            modelAndView.setViewName("dashboard");
+        }
+        return modelAndView;
+    }
+
 
 //    @GetMapping(value = "/dashboard")
 //    @ResponseBody
