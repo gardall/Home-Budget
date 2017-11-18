@@ -27,25 +27,25 @@ public class MoneyTransactionController {
     @Autowired
     private UserService userService;
 
-    @GetMapping(value = "/dashboard")
-    @ResponseBody
-    public String testMethod() {
-
-        MoneyTransaction trans = new MoneyTransaction();
-        trans.setName("T 1");
-        trans.setAmount(100);
-        SecurityContextHolder.getContext().getAuthentication().getName();
-        trans.setBuyer(userService.findUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()));
-        trans.setTargetUsres(Arrays.asList(userService.findUserByUsername("user1"),userService.findUserByUsername("admin")));
-        moneyTransactionService.saveMoneyTransaction(trans);
-
-        return moneyTransactionService.findAllTransactions()
-                .stream()
-                .map(moneyTransaction -> format("%d | %d | %s | %s",
-                        moneyTransaction.getId(),
-                        moneyTransaction.getAmount(),
-                        moneyTransaction.getBuyer().getUsername(),
-                        Arrays.toString(moneyTransaction.getTargetUsres().stream().map(a->a.getUsername()).toArray())))
-                .collect(collectingAndThen(joining("<br>"), response -> response +"<br>"));
-    }
+//    @GetMapping(value = "/dashboard")
+//    @ResponseBody
+//    public String testMethod() {
+//
+//        MoneyTransaction trans = new MoneyTransaction();
+//        trans.setName("T 1");
+//        trans.setAmount(100);
+//        SecurityContextHolder.getContext().getAuthentication().getName();
+//        trans.setBuyer(userService.findUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()));
+//        trans.setTargetUsers(Arrays.asList(userService.findUserByUsername("user1"),userService.findUserByUsername("admin")));
+//        moneyTransactionService.saveMoneyTransaction(trans);
+//
+//        return moneyTransactionService.findAllTransactions()
+//                .stream()
+//                .map(moneyTransaction -> format("%d | %d | %s | %s",
+//                        moneyTransaction.getId(),
+//                        moneyTransaction.getAmount(),
+//                        moneyTransaction.getBuyer().getUsername(),
+//                        Arrays.toString(moneyTransaction.getTargetUsers().stream().map(a->a.getUsername()).toArray())))
+//                .collect(collectingAndThen(joining("<br>"), response -> response +"<br>"));
+//    }
 }

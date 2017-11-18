@@ -11,21 +11,79 @@
 <div class="container content">
 
     <div class="starter-template">
-        <h1>Dashboard</h1>
-
-        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
         <div class="row">
-            <p>All transactions:</p>
-
-        </div>
-        <div class="row">
-            <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="col-9">
+                <h1 th:inline="text">Dashboard | User: [[${#httpServletRequest.remoteUser}]]</h1>
+            </div>
+            <div class="col-3">
                 <form th:action="@{/logout}" method="post">
                     <input type="submit" class="btn btn-lg btn-primary btn-block" value="Sign Out"/>
                 </form>
             </div>
         </div>
+        <hr>
+        <div class="row">
+            <div class="col-6">
+                <h3>Summary:</h3>
+            </div>
+            <div class="col-6">
+                <h3>Add transaction:</h3>
+                <br/>
+
+
+                <form th:action="@{/add-transaction}" method="POST" class="form-add-transaction">
+                    <div class="row">
+                        <div class="col-6">
+                            <h4>Buyer</h4><br/>
+                            <div class="radio">
+                                <label><input type="radio" name="optradioBuyer">Me</label>
+                            </div>
+                            <div class="radio">
+                                <label><input type="radio" name="optradioBuyer">User 2</label>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <h4>Target</h4><br/>
+                            <div class="checkbox">
+                                <label><input type="checkbox" value="">Option 1</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" value="">Option 2</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" value="">Option 3</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="transactionItem">Item:</label>
+                        <input type="text" class="form-control" id="transactionItem" placeholder="Enter item">
+                    </div>
+                    <div class="form-group">
+                        <label for="transactionAmount">Amount:</label>
+                        <input type="number" class="form-control" id="transactionAmount"
+                               placeholder="For Example: 100,50">
+                    </div>
+
+                    <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Add" type="Submit"
+                            th:text="Add"></button>
+                    <br/>
+                </form>
+            </div>
+
+        </div>
     </div>
+    <hr>
+    <div class="row col-12">
+        <h3>Your transactions:</h3>
+    </div>
+    <hr>
+    <div class="row col-12">
+        <h3>Transactions that includes You:</h3>
+    </div>
+</div>
 </div>
 
 <div th:replace="fragments/footer :: footer"/>

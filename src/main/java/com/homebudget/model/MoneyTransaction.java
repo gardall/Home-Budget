@@ -33,7 +33,7 @@ public class MoneyTransaction {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "trans_id")
     )
-    private List<User> targetUsres;
+    private List<User> targetUsers;
 
     public int getId() {
         return id;
@@ -67,12 +67,12 @@ public class MoneyTransaction {
         this.buyer = buyer;
     }
 
-    public List<User> getTargetUsres() {
-        return targetUsres;
+    public List<User> getTargetUsers() {
+        return targetUsers;
     }
 
-    public void setTargetUsres(List<User> targetUsres) {
-        this.targetUsres = targetUsres;
+    public void setTargetUsers(List<User> targetUsers) {
+        this.targetUsers = targetUsers;
     }
 }
 

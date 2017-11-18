@@ -60,10 +60,10 @@ public class LoginController {
         return "/home";
     }
 
-//    @GetMapping("/dashboard")
-//    public String dashboard() {
-//        return "/dashboard";
-//    }
+    @GetMapping("/dashboard")
+    public String dashboard() {
+        return "/dashboard";
+    }
 
     @GetMapping("/about")
     public String about() {
