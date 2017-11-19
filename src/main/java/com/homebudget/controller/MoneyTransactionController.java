@@ -47,9 +47,8 @@ public class MoneyTransactionController {
         } else {
             moneyTransaction.setBuyer(userService.findUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()));
             moneyTransaction.setTargetUsers(Arrays.asList(userService.findUserByUsername("user1"), userService.findUserByUsername("admin")));
-
             moneyTransactionService.saveMoneyTransaction(moneyTransaction);
-            modelAndView.addObject("successMessage", "Transaction has been added successfully!");
+
             modelAndView.addObject("moneyTransaction", new MoneyTransaction());
             modelAndView.addObject("transactions",moneyTransactionService.findAllTransactions());
             modelAndView.addObject("userNames",userService.getUserNames());
@@ -57,27 +56,4 @@ public class MoneyTransactionController {
         }
         return modelAndView;
     }
-
-
-//    @GetMapping(value = "/dashboard")
-//    @ResponseBody
-//    public String testMethod() {
-//
-//        MoneyTransaction trans = new MoneyTransaction();
-//        trans.setName("T 1");
-//        trans.setAmount(100);
-//        SecurityContextHolder.getContext().getAuthentication().getName();
-//        trans.setBuyer(userService.findUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()));
-//        trans.setTargetUsers(Arrays.asList(userService.findUserByUsername("user1"),userService.findUserByUsername("admin")));
-//        moneyTransactionService.saveMoneyTransaction(trans);
-//
-//        return moneyTransactionService.findAllTransactions()
-//                .stream()
-//                .map(moneyTransaction -> format("%d | %d | %s | %s",
-//                        moneyTransaction.getId(),
-//                        moneyTransaction.getAmount(),
-//                        moneyTransaction.getBuyer().getUsername(),
-//                        Arrays.toString(moneyTransaction.getTargetUsers().stream().map(a->a.getUsername()).toArray())))
-//                .collect(collectingAndThen(joining("<br>"), response -> response +"<br>"));
-//    }
 }
