@@ -86,13 +86,15 @@
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
                 <th scope="col">Amount</th>
+                <th scope="col">Buyer</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="t : ${transactions}">
-                <th scope="row">1</th>
+                <th scope="row">#</th>
                 <td th:text="${t.name}"></td>
                 <td th:text="${t.amount}"></td>
+                <td th:text="${t.buyer.username}"></td>
             </tr>
             </tbody>
         </table>
