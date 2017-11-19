@@ -35,24 +35,19 @@
                     <div class="row">
                         <div class="col-6">
                             <h4>Buyer</h4><br/>
-                            <div class="radio">
-                                <label><input type="radio" name="optradioBuyer">Me</label>
-                            </div>
-                            <div class="radio">
-                                <label><input type="radio" name="optradioBuyer">User 2</label>
+                            <div th:each="userName : ${userNames}">
+                                <div class="radio">
+                                    <label><input th:text="${userName}" type="radio" name="optradioBuyer"></label>
+                                </div>
                             </div>
                         </div>
 
                         <div class="col-6">
                             <h4>Target</h4><br/>
-                            <div class="checkbox">
-                                <label><input type="checkbox" value="">Option 1</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" value="">Option 2</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" value="">Option 3</label>
+                            <div th:each="userName : ${userNames}">
+                                <div class="checkbox">
+                                    <label><input th:text="${userName}" type="checkbox" value=""></label>
+                                </div>
                             </div>
                         </div>
                     </div>

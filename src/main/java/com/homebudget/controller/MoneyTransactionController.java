@@ -33,6 +33,7 @@ public class MoneyTransactionController {
         MoneyTransaction moneyTransaction = new MoneyTransaction();
         modelAndView.addObject("moneyTransaction", moneyTransaction);
         modelAndView.addObject("transactions",moneyTransactionService.findAllTransactions());
+        modelAndView.addObject("userNames",userService.getUserNames());
         modelAndView.setViewName("dashboard");
         return modelAndView;
     }
@@ -51,6 +52,7 @@ public class MoneyTransactionController {
             modelAndView.addObject("successMessage", "Transaction has been added successfully!");
             modelAndView.addObject("moneyTransaction", new MoneyTransaction());
             modelAndView.addObject("transactions",moneyTransactionService.findAllTransactions());
+            modelAndView.addObject("userNames",userService.getUserNames());
             modelAndView.setViewName("dashboard");
         }
         return modelAndView;
