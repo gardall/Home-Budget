@@ -50,6 +50,7 @@ public class MoneyTransactionController {
             moneyTransactionService.saveMoneyTransaction(moneyTransaction);
             modelAndView.addObject("successMessage", "Transaction has been added successfully!");
             modelAndView.addObject("moneyTransaction", new MoneyTransaction());
+            modelAndView.addObject("transactions",moneyTransactionService.findAllTransactions());
             modelAndView.setViewName("dashboard");
         }
         return modelAndView;

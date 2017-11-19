@@ -109,6 +109,13 @@
             <version>3.2.1</version>
         </dependency>
 
+        <!-- Data Tables -->
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>datatables</artifactId>
+            <version>1.10.16</version>
+        </dependency>
+
         <!-- Neko HTML -->
         <dependency>
             <groupId>net.sourceforge.nekohtml</groupId>
