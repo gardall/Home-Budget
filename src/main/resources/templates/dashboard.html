@@ -59,7 +59,8 @@
 
                     <div class="form-group">
                         <label for="transactionItem">Item:</label>
-                        <input type="text" th:field="*{name}" class="form-control" id="transactionItem" placeholder="Enter item">
+                        <input type="text" th:field="*{name}" class="form-control" id="transactionItem"
+                               placeholder="Enter item">
                     </div>
                     <div class="form-group">
                         <label for="transactionAmount">Amount:</label>
@@ -78,6 +79,23 @@
     <hr>
     <div class="row col-12">
         <h3>Your transactions:</h3>
+        <br/><br/>
+        <table class="table table-bordered table-dark">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Amount</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="t : ${transactions}">
+                <th scope="row">1</th>
+                <td th:text="${t.name}"></td>
+                <td th:text="${t.amount}"></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
     <hr>
     <div class="row col-12">

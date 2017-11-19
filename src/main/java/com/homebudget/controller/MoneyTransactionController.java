@@ -8,12 +8,15 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 @Controller
 public class MoneyTransactionController {
@@ -29,6 +32,7 @@ public class MoneyTransactionController {
         ModelAndView modelAndView = new ModelAndView();
         MoneyTransaction moneyTransaction = new MoneyTransaction();
         modelAndView.addObject("moneyTransaction", moneyTransaction);
+        modelAndView.addObject("transactions",moneyTransactionService.findAllTransactions());
         modelAndView.setViewName("dashboard");
         return modelAndView;
     }
@@ -38,7 +42,7 @@ public class MoneyTransactionController {
         ModelAndView modelAndView = new ModelAndView();
 
         if (bindingResult.hasErrors()) {
-            modelAndView.setViewName("registration");
+            modelAndView.setViewName("dashboard");
         } else {
             moneyTransaction.setBuyer(userService.findUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()));
             moneyTransaction.setTargetUsers(Arrays.asList(userService.findUserByUsername("user1"), userService.findUserByUsername("admin")));
