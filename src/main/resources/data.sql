@@ -1,0 +1,1 @@
+INSERT INTO role VALUES (1,'ADMIN') ON DUPLICATE KEY UPDATE role_id = role_id;

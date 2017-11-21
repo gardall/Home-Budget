@@ -12,8 +12,10 @@ Task list:
 - [x] Create connection with MySQL database
 - [x] Provide authentication
 - [x] Init Bootstrap 4 based views
-- [ ] Add calculation modules
-- [ ] Set up database for money transactions
-- [ ] Update dashboard view
+- [x] Set up database for money transactions
+- [x] Prepare first dashboard view
+- [ ] Add target users for transaction and update dashboard view.
+- [ ] Change input value type for field "amount" to decimal/
+- [ ] Add summary for payments that includes other users.
 - [ ] Add tests
  

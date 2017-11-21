@@ -1,4 +1,4 @@
-package com.lechowiczfamily.homebudget.config;
+package com.homebudget.config;
 
 import javax.sql.DataSource;
 

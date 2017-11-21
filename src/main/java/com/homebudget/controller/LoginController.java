@@ -1,13 +1,11 @@
-package com.lechowiczfamily.homebudget.controller;
+package com.homebudget.controller;
 
 import javax.validation.Valid;
 
-import com.lechowiczfamily.homebudget.model.User;
-import com.lechowiczfamily.homebudget.service.UserService;
+import com.homebudget.model.User;
+import com.homebudget.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,14 +19,14 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
+    @GetMapping(value = "/login")
     public ModelAndView login() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+    @GetMapping(value = "/registration")
     public ModelAndView registration() {
         ModelAndView modelAndView = new ModelAndView();
         User user = new User();
@@ -52,7 +50,7 @@ public class LoginController {
             userService.saveUser(user);
             modelAndView.addObject("successMessage", "User has been registered successfully");
             modelAndView.addObject("user", new User());
-            modelAndView.setViewName("registration");
+            modelAndView.setViewName("login");
         }
         return modelAndView;
     }
@@ -60,11 +58,6 @@ public class LoginController {
     @GetMapping(value = {"/","/home"})
     public String home() {
         return "/home";
-    }
-
-    @GetMapping("/dashboard")
-    public String dashboard() {
-        return "/dashboard";
     }
 
     @GetMapping("/about")

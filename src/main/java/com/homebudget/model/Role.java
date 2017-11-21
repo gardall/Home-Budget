@@ -1,4 +1,4 @@
-package com.lechowiczfamily.homebudget.model;
+package com.homebudget.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,10 +10,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "role")
 public class Role {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="role_id")
     private int id;
+
     @Column(name="role")
     private String role;
 
