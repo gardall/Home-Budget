@@ -2,7 +2,11 @@ package com.homebudget.service;
 
 import com.homebudget.model.User;
 
+import java.util.List;
+
 public interface UserService {
-    public User findUserByUsername(String username);
-    public void saveUser(User user);
+    User findUserByUsername(String username);
+    User findUserById(int id);
+    void saveUser(User user);
+    List<String> getUserNames();
 }

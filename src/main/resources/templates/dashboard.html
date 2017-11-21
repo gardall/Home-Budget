@@ -11,21 +11,124 @@
 <div class="container content">
 
     <div class="starter-template">
-        <h1>Dashboard</h1>
-
-        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
         <div class="row">
-            <p>All transactions:</p>
-
-        </div>
-        <div class="row">
-            <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="col-9">
+                <h1 th:inline="text">Dashboard | User: [[${#httpServletRequest.remoteUser}]]</h1>
+            </div>
+            <div class="col-3">
                 <form th:action="@{/logout}" method="post">
                     <input type="submit" class="btn btn-lg btn-primary btn-block" value="Sign Out"/>
                 </form>
             </div>
         </div>
+        <hr>
+        <div class="row">
+            <div class="col-6">
+                <h3>Summary:</h3>
+                <hr>
+                <h4>Your expenses: </h4>
+                <p th:text="${sumOfCurrentUserTransactions}"></p>
+
+            </div>
+            <div class="col-6">
+                <h3>Add transaction:</h3>
+                <hr>
+
+                <form th:action="@{/dashboard}" method="POST" action="#" class="form-add-transaction">
+                    <!--<div class="row">-->
+                        <!--<div class="col-6">-->
+                            <!--<h4>Buyer</h4><br/>-->
+                            <!--<div th:each="userName : ${userNames}">-->
+                                <!--<div class="radio">-->
+                                    <!--<label><input th:text="${userName}" th:value="${userName}" type="radio" name="optradioBuyer"></label>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+                        <!--<div class="col-6">-->
+                            <!--<h4>Target</h4><br/>-->
+                            <!--<div th:each="userName : ${userNames}">-->
+                                <!--<div class="checkbox">-->
+                                    <!--<label><input th:text="${userName}" type="checkbox" value=""></label>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                    <div class="form-group">
+                        <label for="transactionItem">Item:</label>
+                        <input type="text" th:value="${moneyTransaction.name}" name="name" class="form-control" id="transactionItem"
+                               placeholder="Enter item">
+                    </div>
+                    <div class="form-group">
+                        <label for="transactionAmount">Amount:</label>
+                        <input type="number" th:value="${moneyTransaction.amount}" name ="amount" class="form-control" id="transactionAmount"
+                               placeholder="For Example: 100,50">
+                    </div>
+
+                    <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Add" type="Submit"
+                            th:text="Add"></button>
+                    <br/>
+                </form>
+            </div>
+
+        </div>
     </div>
+    <hr>
+    <div class="row col-12">
+        <h3>Your transactions:</h3>
+        <br/><br/>
+        <table id="currentUserTransactionsTable" class="table table-bordered table-dark">
+            <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Buyer</th>
+                <!--<th scope="col">Target Users</th>-->
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="t : ${currentUserTransactions}">
+                <td th:text="${t.name}"></td>
+                <td th:text="${t.amount}"></td>
+                <td th:text="${t.buyer.username}"></td>
+                <!--<td>-->
+                    <!--<ul th:each="u : ${t.targetUsers}">-->
+                        <!--<li th:text="${u.username}"></li>-->
+                    <!--</ul>-->
+                <!--</td>-->
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr>
+    <div class="row col-12">
+        <h3>All transactions:</h3>
+        <br/><br/>
+        <table id="allTransactionsTable" class="table table-bordered table-dark">
+            <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Buyer</th>
+                <!--<th scope="col">Target Users</th>-->
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="t : ${allTransactions}">
+                <td th:text="${t.name}"></td>
+                <td th:text="${t.amount}"></td>
+                <td th:text="${t.buyer.username}"></td>
+                <!--<td>-->
+                <!--<ul th:each="u : ${t.targetUsers}">-->
+                <!--<li th:text="${u.username}"></li>-->
+                <!--</ul>-->
+                <!--</td>-->
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 </div>
 
 <div th:replace="fragments/footer :: footer"/>

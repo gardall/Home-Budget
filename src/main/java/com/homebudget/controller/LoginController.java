@@ -50,7 +50,7 @@ public class LoginController {
             userService.saveUser(user);
             modelAndView.addObject("successMessage", "User has been registered successfully");
             modelAndView.addObject("user", new User());
-            modelAndView.setViewName("registration");
+            modelAndView.setViewName("login");
         }
         return modelAndView;
     }
@@ -59,11 +59,6 @@ public class LoginController {
     public String home() {
         return "/home";
     }
-
-//    @GetMapping("/dashboard")
-//    public String dashboard() {
-//        return "/dashboard";
-//    }
 
     @GetMapping("/about")
     public String about() {

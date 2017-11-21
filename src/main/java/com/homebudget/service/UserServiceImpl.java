@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -29,11 +31,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findUserById(int id) {
+        return userRepository.findById(id);
+    }
+
+    @Override
     public void saveUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(1);
         Role userRole = roleRepository.findByRole("ADMIN");
         user.setRoles(new HashSet<>(Arrays.asList(userRole)));
         userRepository.save(user);
+    }
+
+    @Override
+    public List<String> getUserNames() {
+        return userRepository.findAll().stream().map(a->a.getUsername()).collect(Collectors.toList());
     }
 }
