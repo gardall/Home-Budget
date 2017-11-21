@@ -31,6 +31,10 @@ public class MoneyTransactionController {
     public ModelAndView dashboard() {
         ModelAndView modelAndView = new ModelAndView();
         MoneyTransaction moneyTransaction = new MoneyTransaction();
+        List<String> targetUserNames = new ArrayList<>();
+        String buyerName = new String();
+        modelAndView.addObject("targetUserNames",targetUserNames);
+        modelAndView.addObject("buyerName",buyerName);
         modelAndView.addObject("moneyTransaction", moneyTransaction);
         modelAndView.addObject("transactions",moneyTransactionService.findAllTransactions());
         modelAndView.addObject("userNames",userService.getUserNames());

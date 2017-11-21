@@ -30,8 +30,7 @@
                 <h3>Add transaction:</h3>
                 <br/>
 
-                <form th:action="@{/dashboard}" method="POST" action="#"
-                      th:object="${moneyTransaction}" class="form-add-transaction">
+                <form th:action="@{/dashboard}" method="POST" action="#" class="form-add-transaction">
                     <div class="row">
                         <div class="col-6">
                             <h4>Buyer</h4><br/>
@@ -54,12 +53,12 @@
 
                     <div class="form-group">
                         <label for="transactionItem">Item:</label>
-                        <input type="text" th:field="*{name}" class="form-control" id="transactionItem"
+                        <input type="text" th:value="${moneyTransaction.name}" name="name" class="form-control" id="transactionItem"
                                placeholder="Enter item">
                     </div>
                     <div class="form-group">
                         <label for="transactionAmount">Amount:</label>
-                        <input type="number" th:field="*{amount}" class="form-control" id="transactionAmount"
+                        <input type="number" th:value="${moneyTransaction.amount}" name ="amount" class="form-control" id="transactionAmount"
                                placeholder="For Example: 100,50">
                     </div>
 
