@@ -6,8 +6,8 @@ import com.homebudget.model.User;
 import java.util.List;
 
 public interface MoneyTransactionService {
-    public MoneyTransaction findMoneyTransactionByName(String transactionName);
-    public void saveMoneyTransaction(MoneyTransaction transaction);
-    public List<MoneyTransaction> findAllTransactions();
-    public List<MoneyTransaction> findCurrentUserTransactions();
+    MoneyTransaction findMoneyTransactionByName(String transactionName);
+    void saveMoneyTransaction(MoneyTransaction transaction);
+    List<MoneyTransaction> findAllTransactions();
+    List<MoneyTransaction> findCurrentUserTransactions();
 }
