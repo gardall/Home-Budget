@@ -30,11 +30,9 @@ public class MoneyTransactionController {
     public ModelAndView dashboard() {
         ModelAndView modelAndView = new ModelAndView();
         MoneyTransaction moneyTransaction = new MoneyTransaction();
-//        List<String> targetUserNames = new ArrayList<>();
         List<MoneyTransaction> currentUserTransactions = moneyTransactionService.findCurrentUserTransactions();
         int sumOfCurrentUseTransactions = currentUserTransactions.stream().mapToInt(MoneyTransaction::getAmount).sum();
 
-//        modelAndView.addObject("targetUserNames", targetUserNames);
         modelAndView.addObject("moneyTransaction", moneyTransaction);
         modelAndView.addObject("sumOfCurrentUserTransactions",sumOfCurrentUseTransactions);
         modelAndView.addObject("currentUserTransactions", currentUserTransactions);
@@ -52,7 +50,6 @@ public class MoneyTransactionController {
             modelAndView.setViewName("dashboard");
         } else {
             moneyTransaction.setBuyer(userService.findUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()));
-//            moneyTransaction.setTargetUsers(Arrays.asList(userService.findUserByUsername("user1"), userService.findUserByUsername("admin")));
             moneyTransactionService.saveMoneyTransaction(moneyTransaction);
 
             List<MoneyTransaction> currentUserTransactions = moneyTransactionService.findCurrentUserTransactions();

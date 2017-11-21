@@ -35,25 +35,6 @@
                 <hr>
 
                 <form th:action="@{/dashboard}" method="POST" action="#" class="form-add-transaction">
-                    <!--<div class="row">-->
-                        <!--<div class="col-6">-->
-                            <!--<h4>Buyer</h4><br/>-->
-                            <!--<div th:each="userName : ${userNames}">-->
-                                <!--<div class="radio">-->
-                                    <!--<label><input th:text="${userName}" th:value="${userName}" type="radio" name="optradioBuyer"></label>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-
-                        <!--<div class="col-6">-->
-                            <!--<h4>Target</h4><br/>-->
-                            <!--<div th:each="userName : ${userNames}">-->
-                                <!--<div class="checkbox">-->
-                                    <!--<label><input th:text="${userName}" type="checkbox" value=""></label>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
 
                     <div class="form-group">
                         <label for="transactionItem">Item:</label>
@@ -84,7 +65,6 @@
                 <th scope="col">Name</th>
                 <th scope="col">Amount</th>
                 <th scope="col">Buyer</th>
-                <!--<th scope="col">Target Users</th>-->
             </tr>
             </thead>
             <tbody>
@@ -92,11 +72,6 @@
                 <td th:text="${t.name}"></td>
                 <td th:text="${t.amount}"></td>
                 <td th:text="${t.buyer.username}"></td>
-                <!--<td>-->
-                    <!--<ul th:each="u : ${t.targetUsers}">-->
-                        <!--<li th:text="${u.username}"></li>-->
-                    <!--</ul>-->
-                <!--</td>-->
             </tr>
             </tbody>
         </table>
@@ -111,7 +86,6 @@
                 <th scope="col">Name</th>
                 <th scope="col">Amount</th>
                 <th scope="col">Buyer</th>
-                <!--<th scope="col">Target Users</th>-->
             </tr>
             </thead>
             <tbody>
@@ -119,11 +93,6 @@
                 <td th:text="${t.name}"></td>
                 <td th:text="${t.amount}"></td>
                 <td th:text="${t.buyer.username}"></td>
-                <!--<td>-->
-                <!--<ul th:each="u : ${t.targetUsers}">-->
-                <!--<li th:text="${u.username}"></li>-->
-                <!--</ul>-->
-                <!--</td>-->
             </tr>
             </tbody>
         </table>

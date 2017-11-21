@@ -11,7 +11,6 @@ import java.util.List;
 
 @Repository
 public interface MoneyTransactionRepository extends JpaRepository<MoneyTransaction, Integer> {
-    MoneyTransaction findMoneyTransactionByName(String transactionName);
     List<MoneyTransaction> findMoneyTransactionByBuyer(User buyer);
 }
 
