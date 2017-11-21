@@ -19,11 +19,6 @@ public class MoneyTransactionServiceImpl implements MoneyTransactionService {
     private UserService userService;
 
     @Override
-    public MoneyTransaction findMoneyTransactionByName(String transactionName) {
-        return moneyTransactionRepository.findMoneyTransactionByName(transactionName);
-    }
-
-    @Override
     public void saveMoneyTransaction(MoneyTransaction transaction) {
         moneyTransactionRepository.save(transaction);
     }
