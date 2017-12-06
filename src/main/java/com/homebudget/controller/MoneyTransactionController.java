@@ -2,6 +2,7 @@ package com.homebudget.controller;
 
 import com.homebudget.model.MoneyTransaction;
 import com.homebudget.model.TransactionForm;
+import com.homebudget.model.User;
 import com.homebudget.service.MoneyTransactionService;
 import com.homebudget.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -34,7 +36,7 @@ public class MoneyTransactionController {
         List<MoneyTransaction> currentUserTransactions = moneyTransactionService.findCurrentUserTransactions();
         int sumOfCurrentUseTransactions = currentUserTransactions.stream().mapToInt(MoneyTransaction::getAmount).sum();
 
-        modelAndView.addObject("sumOfCurrentUserTransactions",sumOfCurrentUseTransactions);
+        modelAndView.addObject("sumOfCurrentUserTransactions", sumOfCurrentUseTransactions);
         modelAndView.addObject("currentUserTransactions", currentUserTransactions);
         modelAndView.addObject("transactionForm", new TransactionForm());
         modelAndView.addObject("allTransactions", moneyTransactionService.findAllTransactions());
@@ -55,12 +57,19 @@ public class MoneyTransactionController {
             moneyTransaction.setAmount(transactionForm.getAmount());
             moneyTransaction.setName(transactionForm.getName());
 
+            List<User> targetUsers = new ArrayList<>();
+
+            for (String username : transactionForm.getTargetUsers()) {
+                if (username != null) targetUsers.add(userService.findUserByUsername(username));
+            }
+
+            moneyTransaction.setTargetUsers(targetUsers);
             moneyTransactionService.saveMoneyTransaction(moneyTransaction);
 
             List<MoneyTransaction> currentUserTransactions = moneyTransactionService.findCurrentUserTransactions();
             int sumOfCurrentUseTransactions = currentUserTransactions.stream().mapToInt(MoneyTransaction::getAmount).sum();
 
-            modelAndView.addObject("sumOfCurrentUserTransactions",sumOfCurrentUseTransactions);
+            modelAndView.addObject("sumOfCurrentUserTransactions", sumOfCurrentUseTransactions);
             modelAndView.addObject("currentUserTransactions", moneyTransactionService.findCurrentUserTransactions());
             modelAndView.addObject("transactionForm", new TransactionForm());
             modelAndView.addObject("allTransactions", moneyTransactionService.findAllTransactions());

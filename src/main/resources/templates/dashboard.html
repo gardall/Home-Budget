@@ -34,7 +34,8 @@
                 <h3>Add transaction:</h3>
                 <hr>
 
-                <form th:action="@{/dashboard}" th:object="${transactionForm}" method="POST" action="#" class="form-add-transaction">
+                <form th:action="@{/dashboard}" th:object="${transactionForm}" method="POST" action="#"
+                      class="form-add-transaction">
 
                     <div class="row">
 
@@ -53,8 +54,11 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <h5>Select target users:</h5>
-                                <div th:each="userName : ${userNames}">
-                                    <input type="checkbox" th:value="${userName}" checked/>
+                                <div th:each="userName: ${userNames}">
+                                    <input type="checkbox"
+                                           th:value="${userName}"
+                                           th:field="*{targetUsers}"
+                                           checked/>
                                     <label th:text="${userName}"></label>
                                 </div>
                             </div>
@@ -92,13 +96,19 @@
                 <th scope="col">Name</th>
                 <th scope="col">Amount</th>
                 <th scope="col">Buyer</th>
+                <th scope="col">Target Users</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="t : ${currentUserTransactions}">
-                <td th:text="${t.name}"></td>
-                <td th:text="${t.amount}"></td>
-                <td th:text="${t.buyer.username}"></td>
+                <td th:text="${t.getName()}"></td>
+                <td th:text="${t.getAmount()}"></td>
+                <td th:text="${t.getBuyer().getUsername()}"></td>
+                <td>
+                    <ul th:each="u : ${t.getTargetUsers()}">
+                        <li th:text="${u.getUsername()}"></li>
+                    </ul>
+                </td>
             </tr>
             </tbody>
         </table>
@@ -117,17 +127,21 @@
             </thead>
             <tbody>
             <tr th:each="t : ${allTransactions}">
-                <td th:text="${t.name}"></td>
-                <td th:text="${t.amount}"></td>
-                <td th:text="${t.buyer.username}"></td>
+                <td th:text="${t.getName()}"></td>
+                <td th:text="${t.getAmount()}"></td>
+                <td th:text="${t.getBuyer().getUsername()}"></td>
+                <td>
+                    <ul th:each="u : ${t.getTargetUsers()}">
+                        <li th:text="${u.getUsername()}"></li>
+                    </ul>
+                </td>
             </tr>
             </tbody>
         </table>
     </div>
 </div>
-</div>
 
-<div th:replace="fragments/footer :: footer"/>
+<div th:replace="fragments/footer :: footer"></div>
 
 </body>
 </html>
