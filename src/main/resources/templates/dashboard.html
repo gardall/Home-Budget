@@ -34,16 +34,47 @@
                 <h3>Add transaction:</h3>
                 <hr>
 
-                <form th:action="@{/dashboard}" method="POST" action="#" class="form-add-transaction">
+                <form th:action="@{/dashboard}" th:object="${transactionForm}" method="POST" action="#"
+                      class="form-add-transaction">
+
+                    <div class="row">
+
+                        <!--Buyer-->
+                        <div class="col-6">
+                            <div class="form-group">
+                                <h5>Select buyer:</h5>
+                                <div th:each="userName : ${userNames}">
+                                    <input type="radio" name="buyerRadio" th:field="*{buyer}" th:value="${userName}"/>
+                                    <label th:text="${userName}"></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Target users-->
+                        <div class="col-6">
+                            <div class="form-group">
+                                <h5>Select target users:</h5>
+                                <div th:each="userName: ${userNames}">
+                                    <input type="checkbox"
+                                           th:value="${userName}"
+                                           th:field="*{targetUsers}"
+                                           checked/>
+                                    <label th:text="${userName}"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <label for="transactionItem">Item:</label>
-                        <input type="text" th:value="${moneyTransaction.name}" name="name" class="form-control" id="transactionItem"
+                        <input type="text" th:field="*{name}" name="name" class="form-control"
+                               id="transactionItem"
                                placeholder="Enter item">
                     </div>
                     <div class="form-group">
                         <label for="transactionAmount">Amount:</label>
-                        <input type="number" th:value="${moneyTransaction.amount}" name ="amount" class="form-control" id="transactionAmount"
+                        <input type="number" th:field="*{amount}" name="amount" class="form-control"
+                               id="transactionAmount"
                                placeholder="For Example: 100,50">
                     </div>
 
@@ -65,13 +96,19 @@
                 <th scope="col">Name</th>
                 <th scope="col">Amount</th>
                 <th scope="col">Buyer</th>
+                <th scope="col">Target Users</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="t : ${currentUserTransactions}">
-                <td th:text="${t.name}"></td>
-                <td th:text="${t.amount}"></td>
-                <td th:text="${t.buyer.username}"></td>
+                <td th:text="${t.getName()}"></td>
+                <td th:text="${t.getAmount()}"></td>
+                <td th:text="${t.getBuyer().getUsername()}"></td>
+                <td>
+                    <ul th:each="u : ${t.getTargetUsers()}">
+                        <li th:text="${u.getUsername()}"></li>
+                    </ul>
+                </td>
             </tr>
             </tbody>
         </table>
@@ -90,17 +127,21 @@
             </thead>
             <tbody>
             <tr th:each="t : ${allTransactions}">
-                <td th:text="${t.name}"></td>
-                <td th:text="${t.amount}"></td>
-                <td th:text="${t.buyer.username}"></td>
+                <td th:text="${t.getName()}"></td>
+                <td th:text="${t.getAmount()}"></td>
+                <td th:text="${t.getBuyer().getUsername()}"></td>
+                <td>
+                    <ul th:each="u : ${t.getTargetUsers()}">
+                        <li th:text="${u.getUsername()}"></li>
+                    </ul>
+                </td>
             </tr>
             </tbody>
         </table>
     </div>
 </div>
-</div>
 
-<div th:replace="fragments/footer :: footer"/>
+<div th:replace="fragments/footer :: footer"></div>
 
 </body>
 </html>
