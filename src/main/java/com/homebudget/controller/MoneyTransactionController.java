@@ -54,13 +54,16 @@ public class MoneyTransactionController {
         // Validate form
         if (transactionForm.getName() == null || transactionForm.getName().isEmpty()) {
             message = "Invalid item name!";
-            bindingResult.rejectValue("name","error.name",message);
+            bindingResult.rejectValue("name", "error.name", message);
+        } else if (transactionForm.getAmount() == null || transactionForm.getAmount().isEmpty()) {
+            message = "Invalid amount!";
+            bindingResult.rejectValue("name", "error.buyer", message);
         } else if (transactionForm.getBuyer() == null) {
             message = "Select buyer!";
-            bindingResult.rejectValue("name","error.buyer",message);
+            bindingResult.rejectValue("name", "error.buyer", message);
         } else if (transactionForm.getTargetUsers() == null || transactionForm.getTargetUsers().isEmpty()) {
             message = "Select one or many target users!";
-            bindingResult.rejectValue("name","error.targetUsers",message);
+            bindingResult.rejectValue("name", "error.targetUsers", message);
         } else {
             message = "Transaction added!";
         }
@@ -70,7 +73,7 @@ public class MoneyTransactionController {
         } else {
             MoneyTransaction moneyTransaction = new MoneyTransaction();
             moneyTransaction.setBuyer(userService.findUserByUsername(transactionForm.getBuyer()));
-            moneyTransaction.setAmount(transactionForm.getAmount());
+            moneyTransaction.setAmount((int) (Double.valueOf(transactionForm.getAmount().replace(',', '.')) * 100));
             moneyTransaction.setName(transactionForm.getName());
 
             List<User> targetUsers = new ArrayList<>();

@@ -5,7 +5,7 @@ import java.util.List;
 public class TransactionForm {
     private String buyer;
     private String name;
-    private int amount;
+    private String amount;
     private List<String> targetUsers;
 
     public String getBuyer() {
@@ -24,11 +24,11 @@ public class TransactionForm {
         this.name = name;
     }
 
-    public int getAmount() {
+    public String getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(String amount) {
         this.amount = amount;
     }
 

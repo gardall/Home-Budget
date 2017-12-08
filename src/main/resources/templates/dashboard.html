@@ -27,7 +27,7 @@
                 <h3>Summary:</h3>
                 <hr>
                 <h4>Your expenses: </h4>
-                <p th:text="${sumOfCurrentUserTransactions}"></p>
+                <p th:text="${#numbers.formatDecimal(sumOfCurrentUserTransactions/100.0, 1, 'COMMA', 2, 'POINT')}"></p>
 
             </div>
             <div class="col-6">
@@ -78,7 +78,7 @@
                     <div class="form-group">
                         <label for="transactionAmount">Amount:</label>
                         <input type="number" th:field="*{amount}" name="amount" class="form-control"
-                               id="transactionAmount"
+                               id="transactionAmount" step=".01"
                                placeholder="For Example: 100,50"
                                required>
                     </div>
@@ -110,7 +110,7 @@
             <tbody>
             <tr th:each="t : ${currentUserTransactions}">
                 <td th:text="${t.getName()}"></td>
-                <td th:text="${t.getAmount()}"></td>
+                <td th:text="${#numbers.formatDecimal(t.getAmount()/100.0, 1, 'COMMA', 2, 'POINT')}"></td>
                 <td th:text="${t.getBuyer().getUsername()}"></td>
                 <td>
                     <ul th:each="u : ${t.getTargetUsers()}">
@@ -137,7 +137,7 @@
             <tbody>
             <tr th:each="t : ${allTransactions}">
                 <td th:text="${t.getName()}"></td>
-                <td th:text="${t.getAmount()}"></td>
+                <td th:text="${#numbers.formatDecimal(t.getAmount()/100.0, 1, 'COMMA', 2, 'POINT')}"></td>
                 <td th:text="${t.getBuyer().getUsername()}"></td>
                 <td>
                     <ul th:each="u : ${t.getTargetUsers()}">
