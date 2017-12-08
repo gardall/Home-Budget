@@ -49,6 +49,22 @@ public class MoneyTransactionController {
     public ModelAndView createNewMoneyTransaction(@Valid TransactionForm transactionForm, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
 
+        String message;
+
+        // Validate form
+        if (transactionForm.getName() == null || transactionForm.getName().isEmpty()) {
+            message = "Invalid item name!";
+            bindingResult.rejectValue("name","error.name",message);
+        } else if (transactionForm.getBuyer() == null) {
+            message = "Select buyer!";
+            bindingResult.rejectValue("name","error.buyer",message);
+        } else if (transactionForm.getTargetUsers() == null || transactionForm.getTargetUsers().isEmpty()) {
+            message = "Select one or many target users!";
+            bindingResult.rejectValue("name","error.targetUsers",message);
+        } else {
+            message = "Transaction added!";
+        }
+
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("dashboard");
         } else {
@@ -65,17 +81,20 @@ public class MoneyTransactionController {
 
             moneyTransaction.setTargetUsers(targetUsers);
             moneyTransactionService.saveMoneyTransaction(moneyTransaction);
-
-            List<MoneyTransaction> currentUserTransactions = moneyTransactionService.findCurrentUserTransactions();
-            int sumOfCurrentUseTransactions = currentUserTransactions.stream().mapToInt(MoneyTransaction::getAmount).sum();
-
-            modelAndView.addObject("sumOfCurrentUserTransactions", sumOfCurrentUseTransactions);
-            modelAndView.addObject("currentUserTransactions", moneyTransactionService.findCurrentUserTransactions());
             modelAndView.addObject("transactionForm", new TransactionForm());
-            modelAndView.addObject("allTransactions", moneyTransactionService.findAllTransactions());
-            modelAndView.addObject("userNames", userService.getUserNames());
-            modelAndView.setViewName("dashboard");
         }
+
+        List<MoneyTransaction> currentUserTransactions = moneyTransactionService.findCurrentUserTransactions();
+        int sumOfCurrentUseTransactions = currentUserTransactions.stream().mapToInt(MoneyTransaction::getAmount).sum();
+
+        modelAndView.addObject("transactionForm", transactionForm);
+        modelAndView.addObject("message", message);
+        modelAndView.addObject("sumOfCurrentUserTransactions", sumOfCurrentUseTransactions);
+        modelAndView.addObject("currentUserTransactions", moneyTransactionService.findCurrentUserTransactions());
+        modelAndView.addObject("allTransactions", moneyTransactionService.findAllTransactions());
+        modelAndView.addObject("userNames", userService.getUserNames());
+        modelAndView.setViewName("dashboard");
+
         return modelAndView;
     }
 }
