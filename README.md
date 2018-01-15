@@ -16,8 +16,9 @@ Task list:
 - [x] Prepare first dashboard view
 - [x] Add target users for transaction and update dashboard view
 - [x] Change input value type for field "amount" to decimal
+- [x] Setup profile for development (which do not require MySQL database)
 - [ ] Add summary for payments that includes other users
 - [ ] Add summary chart for current user payments
 - [ ] Add tests
-- [ ] Setup profile for development (which do not require MySQL database)
+
  
